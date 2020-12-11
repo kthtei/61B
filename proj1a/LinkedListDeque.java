@@ -1,10 +1,10 @@
 public class LinkedListDeque<T> {
     private class Node {
-        public T item;
-        public Node prev;
-        public Node next;
+        private T item;
+        private Node prev;
+        private Node next;
 
-        public Node(T item) {
+        Node(T item) {
             this.item = item;
         }
     }
@@ -13,7 +13,7 @@ public class LinkedListDeque<T> {
     private int size;
 
     // Constructor
-    public LinkedListDeque() {
+    LinkedListDeque() {
         sentinel = new Node(null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
@@ -21,7 +21,7 @@ public class LinkedListDeque<T> {
     }
 
     // Constructor that creates a copy of other
-    public LinkedListDeque(LinkedListDeque other) {
+    LinkedListDeque(LinkedListDeque other) {
         size = 0;
         sentinel = new Node(null);
         sentinel.next = sentinel;
@@ -41,20 +41,20 @@ public class LinkedListDeque<T> {
      * @param item item that a user wants to add at the first place of Linked List Deque
      */
     public void addFirst(T item) {
-       Node first = new Node(item);
+        Node first = new Node(item);
 
-       if (sentinel.next == null) {
-           sentinel.next = first;
-           sentinel.prev = first;
-           first.next = sentinel;
-           first.prev = sentinel;
-       } else {
-           first.next = sentinel.next;
-           sentinel.next = first;
-           first.prev = sentinel;
-           first.next.prev = first;
-       }
-       size++;
+        if (sentinel.next == null) {
+            sentinel.next = first;
+            sentinel.prev = first;
+            first.next = sentinel;
+            first.prev = sentinel;
+        } else {
+            first.next = sentinel.next;
+            sentinel.next = first;
+            first.prev = sentinel;
+            first.next.prev = first;
+        }
+        size++;
     }
 
     /**
@@ -92,7 +92,9 @@ public class LinkedListDeque<T> {
     }
 
     /**
-     * Prints the items in the deque from first to last, separated by a space. Once all the items have been printed, print out a new line.
+     * Prints the items in the deque from first to last,
+     * separated by a space. Once all the items have been printed,
+     * print out a new line.
      */
     public void printDeque() {
         int counter = size;
@@ -106,18 +108,23 @@ public class LinkedListDeque<T> {
     }
 
     /**
-     * Removes and returns the item at the front of the deque. If no such item exists, returns null.
-     * @return the item at the front of the deque. If no such item exists, returns null.
+     * Removes and returns the item at the front of the deque. If
+     * no such item exists, returns null.
+     * @return the item at the front of the deque. If no such item exists,
+     * returns null.
      */
     public T removeFirst() {
         if (sentinel.next == null) {
             return null;
         }
+
+        T ans = sentinel.next.item;
+
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
         size--;
 
-        return sentinel.next.item;
+        return ans;
     }
 
     /**
@@ -128,25 +135,61 @@ public class LinkedListDeque<T> {
         if (sentinel.prev == null) {
             return null;
         }
+
+        T ans = sentinel.prev.item;
+
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
         size--;
 
-        return sentinel.prev.item;
+        return ans;
     }
 
     /**
-     * Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
+     * Gets the item at the given index, where 0 is the front,
+     * 1 is the next item, and so forth. If no such item exists,
+     * returns null. Must not alter the deque!
      * @param index the given index of Linked List Deque.
      * @return the item at the given index.
      */
     public T get(int index) {
-        int counter = index;
+        if (index > size - 1) {
+            return null;
+        }
+
+        int count = index;
         Node ptr = sentinel;
-        while (counter > -1) {
+        while (count > -1) {
             ptr = ptr.next;
-            counter--;
+            count--;
         }
         return ptr.item;
+    }
+
+    /**
+     * Gets the item at the given index, where 0 is the front,
+     * 1 is the next item, and so forth. If no such item exists,
+     * returns null. Must not alter the deque! Should be recursive.
+     * @param index the given index of Linked List Deque.
+     * @return the item at the given index.
+     */
+    public T getRecursive(int index) {
+        Node ans = sentinel;
+
+        if (index > size - 1) {
+            return null;
+        }
+
+        ans = helper(ans.next, index);
+        return ans.item;
+    }
+
+    private Node helper(Node ans, int index) {
+        if (index == 0) {
+            return ans;
+        }
+
+        ans = ans.next;
+        return helper(ans, index - 1);
     }
 }
