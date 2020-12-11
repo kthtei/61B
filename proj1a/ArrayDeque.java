@@ -181,7 +181,7 @@ public class ArrayDeque<T> {
     private void reduce() {
         T[] ad = (T[]) new Object[items.length / 2];
         T[] temp = items;
-        int tempNextLast = nextLast;
+        int tempNextLast = nextLast == 0 ? temp.length : nextLast;
 
         items = ad;
         nextFirst = ad.length / 2;
@@ -193,7 +193,7 @@ public class ArrayDeque<T> {
     private void resize(int capacity) {
         T[] ad = (T[]) new Object[capacity];
         T[] temp = items;
-        int tempNextFirst = nextFirst;
+        int tempNextFirst = nextFirst == temp.length ? 0 : nextFirst;
 
         items = ad;
         nextFirst = ad.length / 2;
