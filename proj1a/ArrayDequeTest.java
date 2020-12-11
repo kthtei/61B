@@ -36,7 +36,7 @@ public class ArrayDequeTest {
         System.out.println("Running add/isEmpty/Size test.");
 
 
-        ArrayDeque<String> ad1 = new ArrayDeque<String>();
+        ArrayDeque<String> ad1 = new ArrayDeque<>();
 
         boolean passed = checkEmpty(true, ad1.isEmpty());
 
@@ -65,28 +65,28 @@ public class ArrayDequeTest {
 
         System.out.println("Running add/remove test.");
 
-        ArrayDeque<String> ad1 = new ArrayDeque<>();
+        ArrayDeque<Integer> ad1 = new ArrayDeque<>();
         // should be empty
         boolean passed = checkEmpty(true, ad1.isEmpty());
 
-        ad1.addLast("0");
-        ad1.addLast("1");
-        ad1.addLast("2");
-        ad1.addLast("3");
-        ad1.addLast("4");
-        ad1.addLast("5");
-        ad1.addLast("6");
-        ad1.addLast("7");
-
-
-
-        ad1.addLast("8");
-        ad1.addLast("9");
-        ad1.addLast("10");
-
-        for (int i = 10; i > 0; i--) {
-            System.out.println(ad1.removeLast());
-        }
+        ad1.addLast(10);
+        ad1.addLast(33);
+        ad1.addLast(5);
+        ad1.addLast(12);
+        System.out.println(ad1.removeLast());     //==> 12
+        ad1.addLast(55);
+        ad1.addLast(3);
+        ad1.addLast(8);
+        ad1.addLast(1);
+        ad1.addLast(11);
+        ad1.addLast(39);
+        ad1.addLast(13);
+        ad1.addLast(56);
+        System.out.println(ad1.removeLast());     //==> 56
+        ad1.addLast(22);
+        ad1.addLast(95);
+        ad1.addLast(100);
+        System.out.println(ad1.removeLast());     //==> 100
 
     }
 
@@ -117,8 +117,8 @@ public class ArrayDequeTest {
 
     public static void main(String[] args) {
         System.out.println("Running tests.\n");
-        addIsEmptySizeTest();
+//        addIsEmptySizeTest();
         addRemoveTest();
-        reduceResizeTest();
+//        reduceResizeTest();
     }
 }

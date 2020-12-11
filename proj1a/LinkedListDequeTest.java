@@ -97,18 +97,14 @@ public class LinkedListDequeTest {
         // should be 2
         System.out.println(lld1.get(1));
 
-        LinkedListDeque lld2 = new LinkedListDeque(lld1);
+        lld1.removeFirst();
+        lld1.removeFirst();
+        lld1.removeFirst();
+        lld1.removeFirst();
+        lld1.removeFirst();
+        lld1.removeFirst();
 
-        System.out.println("lld1");
-
-        lld1.printDeque();
-        System.out.println("-----");
-        System.out.println("lld2");
-        lld2.printDeque();
-        System.out.println("removing lld2 last: " + lld2.removeLast());
-        System.out.println("removing lld2 first: " + lld2.removeFirst());
-        lld2.printDeque();
-
+        System.out.println(lld1.size());
 
         printTestStatus(passed);
 

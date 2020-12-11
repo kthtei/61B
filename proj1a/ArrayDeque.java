@@ -12,22 +12,22 @@ public class ArrayDeque<T> {
         nextLast = items.length / 2 + 1;
     }
 
-    /** Creates a deep copy of other */
-    public ArrayDeque(ArrayDeque other) {
-        items = (T[]) new Object[other.items.length];
-        size = 0;
-        nextFirst = other.nextFirst;
-        nextLast = other.nextLast;
-
-        int counter = 0;
-        while (counter < items.length) {
-            if (other.items[counter] != null) {
-                items[counter] = (T) other.items[counter];
-                size++;
-            }
-            counter++;
-        }
-    }
+//    /** Creates a deep copy of other */
+//    public ArrayDeque(ArrayDeque other) {
+//        items = (T[]) new Object[other.items.length];
+//        size = 0;
+//        nextFirst = other.nextFirst;
+//        nextLast = other.nextLast;
+//
+//        int counter = 0;
+//        while (counter < items.length) {
+//            if (other.items[counter] != null) {
+//                items[counter] = (T) other.items[counter];
+//                size++;
+//            }
+//            counter++;
+//        }
+//    }
 
     /**
      * Add a first item to the Array List Deque
@@ -121,8 +121,8 @@ public class ArrayDeque<T> {
         } else {
             ans = items[nextFirst + 1];
             items[nextFirst + 1] = null;
+            nextFirst++;
         }
-        nextFirst++;
         size--;
 
         return ans;
@@ -165,6 +165,9 @@ public class ArrayDeque<T> {
      * @return the item at the given index.
      */
     public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
         return items[index + nextFirst + 1];
     }
 
