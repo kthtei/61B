@@ -165,8 +165,12 @@ public class ArrayDeque<T> {
      * @return the item at the given index.
      */
     public T get(int index) {
-        if (index >= size) {
+        if (index >= items.length) {
             return null;
+        }
+        int temp = index + nextFirst + 1;
+        if (temp >= items.length) {
+            return items[temp - items.length];
         }
         return items[index + nextFirst + 1];
     }
