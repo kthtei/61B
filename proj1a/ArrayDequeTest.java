@@ -69,6 +69,11 @@ public class ArrayDequeTest {
         // should be empty
         boolean passed = checkEmpty(true, ad1.isEmpty());
 
+        ad1.addLast(1);
+        ad1.addLast(2);
+        ad1.addLast(3);
+        System.out.println((ad1.get(2)));
+
     }
 
     /** Adds an item, then removes an item, and ensures that dll is empty afterwards. */
