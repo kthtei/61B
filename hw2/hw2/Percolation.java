@@ -40,7 +40,7 @@ public class Percolation {
         }
 
         // virtual bottom
-        if (row == length - 1 && isFull(row, col)) {
+        if (row == length - 1 && !percolates()) {
             weightedQuickUnionUF.union(virtualBottom, xyTo1D(row, col));
         }
 
@@ -65,9 +65,6 @@ public class Percolation {
 
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
-        if (percolates()) {
-            return weightedQuickUnionUF.connected(virtualTop, xyTo1D(row, col));
-        }
         return weightedQuickUnionUF.connected(virtualTop, xyTo1D(row, col));
     }
 
@@ -88,26 +85,25 @@ public class Percolation {
 
     // use for unit testing (not required)
     public static void main(String[] args) {
-//        Percolation percolation = new Percolation(3);
-//        System.out.println(percolation.isOpen(2, 2)); // false
-//        percolation.open(2, 2);
-//        System.out.println(percolation.numberOfOpenSites()); // 1
-//        System.out.println(percolation.isOpen(2, 2)); // true
-//        percolation.open(0, 2);
-//        System.out.println(percolation.isFull(0, 2)); // true
-//        System.out.println(percolation.isFull(2, 2)); // false
-//        System.out.println(percolation.percolates()); // false
-//        percolation.open(1, 2);
-//        System.out.println(percolation.isFull(1, 2)); // true
-//        System.out.println(percolation.isFull(2, 2)); // true
-//        System.out.println(percolation.percolates()); // true
-//        System.out.println(percolation.numberOfOpenSites()); // 3
-        Percolation percolation = new Percolation(3);
-        percolation.open(0, 0);
+        Percolation percolation = new Percolation(6);
+        percolation.open(0, 5);
+        percolation.open(1, 5);
+        percolation.open(2, 5);
+        percolation.open(3, 5);
+        percolation.open(4, 5);
+        percolation.open(4, 4);
+        percolation.open(3, 3);
+        percolation.open(2, 3);
+        percolation.open(1, 3);
+        percolation.open(1, 2);
+        percolation.open(1, 1);
         percolation.open(1, 0);
         percolation.open(2, 0);
-        percolation.open(2, 2);
-        System.out.println(percolation.isFull(2, 0));
-        System.out.println(percolation.isFull(2, 2));
+        percolation.open(3, 0);
+        percolation.open(4, 0);
+        percolation.open(4, 1);
+        percolation.open(5, 1);
+        percolation.open(4, 3);
+        System.out.println(percolation.percolates());
     }
 }
